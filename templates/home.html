@@ -61,7 +61,7 @@ clearThis(companySymbol)-->
       <li>First: ${{graph.firstValue}}</li>
       <li>Last: ${{graph.lastValue}}</li>
       <li>Total Gain: ${{graph.totalGain}}</li>
-      <li>Total Increase: {{graph.totalIncrease}}%</li>
+      <li>% of start-value: {{graph.totalIncrease}}%</li>
     </ul>
   </div>
 </div>
@@ -69,22 +69,6 @@ clearThis(companySymbol)-->
 {% endfor %}
 
 
-
-<!--<script>
-function func() {
-    var txt;
-    var stockSymbol = prompt("Stock Symbol:","''")
-    var startTime = prompt("Start Time:","''")
-    var endTime = prompt("End Time:","''");
-
-    if (person == null || person == "") {
-        txt = "User cancelled the prompt.";
-    } else {
-        txt = "Hello " + person + "! How are you today?";
-    }
-    document.getElementById("demo").innerHTML = txt;
-}
-</script>-->
 
 </div>
 
