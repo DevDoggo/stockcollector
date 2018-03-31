@@ -1,0 +1,44 @@
+<!-- THIS IS A CHILD TO Layout -->
+{%extends "layout.html"%} <!--Python renders html about               and then this extends layout.html-->
+
+
+{%block headers%}
+  <link rel="stylesheet" href={{cdn_css | safe}} type="text/css" />
+  <script type="text/javascript" src={{cdn_js | safe}}></script>
+{%endblock%}
+
+
+{%block content%}
+<div class=maincontainer>
+
+{% for graph in graphs %}
+<div class="contentcontainer">
+<!--This runs the plot somehow linsk -->
+  <div class="graphcontainer">
+    {{graph.div | safe}}
+    {{graph.script | safe}}
+  </div>
+  <div class="infocontainer">
+    <ul>
+      <li>{{graph.companyTag}}</li>
+      <li>{{graph.dataSource}}</li>
+      <li>{{graph.startTime}}</li>
+      <li>{{graph.endTime}}</li>
+    </ul>
+  </div>
+</div>
+{% endfor %}
+
+<!--Generates a POST request back to /quiz_answers-->
+<form action='/plot' method='POST'>
+    Company Symbol <br>
+    <input type="text" name="companySymbol" value=""></input><br>
+    Starting Time [YYYY-MM-DD]<br>
+    <input type="text" name="startTime" value=""></input><br>
+    Ending Time [YYYY-MM-DD]<br>
+    <input type="text" name="endTime" value=""></input><br>
+    <p><input type="submit" name="mybutton" value="Submit!"/></p>
+</form>
+
+</div>
+{%endblock%}

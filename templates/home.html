@@ -1,0 +1,91 @@
+<!-- THIS IS A CHILD TO Layout -->
+{%extends "layout.html"%} <!--Python renders html about               and then this extends layout.html-->
+
+
+{%block headers%}
+  <link rel="stylesheet" href={{cdn_css | safe}} type="text/css" />
+  <script type="text/javascript" src={{cdn_js | safe}}></script>
+{%endblock%}
+
+
+{%block content%}
+<div class=maincontainer>
+
+<!--  <script type="text/javascript">
+      function clearThis(target){
+          target.value = ""
+      }
+  </script>
+clearThis(companySymbol)-->
+
+
+<div class=newGraphContainer>
+  <div class="newGraphBoxContainer">
+    <form action='/' method='POST' class="inputform">
+      <input type="text" name="companySymbol" maxlength="10" class="newGraphInputboxes"> Symbol</input><br>
+      <input type="text" name="startTime" maxlength="10" class="newGraphInputboxes"> Start Time</input><br>
+      <input type="text" name="endTime" maxlength="10" value={{currentDate}} class="newGraphInputboxes"> End Time</input>
+      <p><input type="submit" name="newGraphButton" value="Create Graph"/></p>
+    </form>
+  </div>
+
+
+  <div class=newGraphTextContainer>
+    <pre>How to use the app:
+    Insert a stock-symbol, a start-date and, if wished, an end-date.
+    Then press Create Graph, to create an interactable graph for the stock. </pre>
+  </div>
+
+</div>
+
+
+<hr>
+
+{% for graph in graphs %}
+<div class="contentcontainer">
+<!--This runs the plot somehow linsk -->
+  <div class="graphcontainer">
+    {{graph.div | safe}}
+    {{graph.script | safe}}
+  </div>
+  <div class="infocontainer">
+    <ul>
+      <li>{{graph.companyTag}}</li>
+      <li>Datasource: {{graph.dataSource}}</li>
+      <li>Start: {{graph.startTime}}</li>
+      <li>End: {{graph.endTime}}</li>
+      <li>Days Increased: ~{{graph.daysIncreased}}%</li>
+      <li>Days Decreased: ~{{graph.daysDecreased}}%</li>
+      <li>Highest: ${{graph.highestValue}}</li>
+      <li>Lowest: ${{graph.lowestValue}}</li>
+      <li>First: ${{graph.firstValue}}</li>
+      <li>Last: ${{graph.lastValue}}</li>
+      <li>Total Gain: ${{graph.totalGain}}</li>
+      <li>Total Increase: {{graph.totalIncrease}}%</li>
+    </ul>
+  </div>
+</div>
+<hr>
+{% endfor %}
+
+
+
+<!--<script>
+function func() {
+    var txt;
+    var stockSymbol = prompt("Stock Symbol:","''")
+    var startTime = prompt("Start Time:","''")
+    var endTime = prompt("End Time:","''");
+
+    if (person == null || person == "") {
+        txt = "User cancelled the prompt.";
+    } else {
+        txt = "Hello " + person + "! How are you today?";
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+</script>-->
+
+</div>
+
+{%endblock%}
